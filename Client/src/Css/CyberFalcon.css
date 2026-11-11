@@ -1,0 +1,190 @@
+/* ========================================
+   CYBER FALCON - ARCADE STYLE
+   ======================================== */
+
+.falcon-page-wrapper {
+  font-family: var(--font-secondary);
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+}
+
+/* Floating Navigation Back Button Theme */
+.floating-back-btn {
+  border-color: rgba(255, 0, 127, 0.25) !important;
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.05) !important;
+}
+
+.floating-back-btn:hover {
+  background: rgba(255, 0, 127, 0.15) !important;
+  border-color: var(--secondary-neon, #ff007f) !important;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.35) !important;
+}
+
+/* Centered Game Cabinet Card */
+.game-content-card {
+  width: 95%;
+  max-width: 650px;
+  margin: 5px auto;
+  padding: 8px 12px;
+  background: rgba(10, 10, 15, 0.95);
+  border: 2px solid rgba(255, 0, 127, 0.2);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 
+    0 0 35px rgba(255, 0, 127, 0.08), 
+    inset 0 0 25px rgba(255, 0, 127, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CRT Screen overrides */
+.cabinet-screen.crt-screen {
+  max-width: calc(75vh - 140px);
+  box-shadow: 
+    0 0 25px rgba(255, 0, 127, 0.15),
+    inset 0 0 35px rgba(0, 0, 0, 0.95);
+}
+
+/* Canvas responsiveness */
+#gameCanvas {
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  image-rendering: pixelated;
+}
+
+/* Pulsing title/glow styles on overlay components */
+.pulse {
+  animation: falcon-pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes falcon-pulse-glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 0, 127, 0.8);
+  }
+}
+
+@media (max-width: 768px) {
+  .game-content-card {
+    padding: 6px;
+    margin: 5px;
+    max-width: 100%;
+  }
+
+  .cabinet-screen.crt-screen {
+    max-width: 100%;
+  }
+}
+
+/* --- DOM UI OVERLAYS --- */
+.cyberfalcon-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(2, 2, 5, 0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: var(--radius-lg, 12px);
+}
+
+.cyberfalcon-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.cyberfalcon-btn {
+  background: transparent;
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  color: #8888a0;
+  font-family: 'Orbitron', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cyberfalcon-btn:hover, .cyberfalcon-btn:focus, .cyberfalcon-btn.selected {
+  border-color: #00f0f0;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0, 240, 240, 0.4);
+  text-shadow: 0 0 8px rgba(0, 240, 240, 0.8);
+  outline: none;
+}
+
+.cyberfalcon-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 36px;
+  font-weight: bold;
+  color: #00d4ff;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.cyberfalcon-subtitle {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 14px;
+  color: #b4b4c8;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.cyberfalcon-leaderboard-container {
+  width: 90%;
+  max-width: 400px;
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.cyberfalcon-leaderboard-container::-webkit-scrollbar {
+  width: 6px;
+}
+.cyberfalcon-leaderboard-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.cyberfalcon-leaderboard-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.5);
+  border-radius: 3px;
+}
+
+.cyberfalcon-leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #fff;
+}
+.cyberfalcon-leaderboard-item:last-child {
+  border-bottom: none;
+}

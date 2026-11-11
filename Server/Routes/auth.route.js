@@ -1,35 +1,44 @@
 import express from "express";
 import {
   loginUser,
+  logoutUser,
+  getCsrfToken,
   isLogin,
-  getAllUsers
+  getAllUsers,
+  registerUser,
+  getUserProfile,
+  updateProfile,
+  upgradeToBecomeSupporter,
+  getUserStats
 } from "../Controllers/auth.controller.js";
-import { isAuthenticated } from "../Middlewares/auth.middleware.js";
-
+import { isAuthenticated, isAdmin } from "../Middlewares/auth.middleware.js";
+import {
+  validateUserRegistration,
+  validateUserLogin,
+  validateSupporterUpgrade,
+  validateObjectId,
+  validatePagination
+} from "../Middlewares/validation.js";
 
 const router = express.Router();
 
-router.post('/signup', async (req, res) => {
-  const { username, email, password } = req.body;
+// Public routes
+router.post('/signup', validateUserRegistration, registerUser);
+router.post('/login', validateUserLogin, loginUser);
+router.post('/logout', logoutUser);
+router.get('/csrf-token', getCsrfToken);
 
-  try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
+// Protected routes
+router.get('/profile', isAuthenticated, isLogin);
+router.get('/profile/:userId', isAuthenticated, validateObjectId('userId'), getUserProfile);
+router.put('/profile', isAuthenticated, updateProfile);
+router.get('/stats', isAuthenticated, getUserStats);
 
-    const newUser = new User({ username, email, password });
-    await newUser.save();
+// Supporter routes
+router.post('/upgrade-supporter', isAuthenticated, validateSupporterUpgrade, upgradeToBecomeSupporter);
 
-    res.status(201).json({ message: 'User created successfully' });
-  } catch (err) {
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+// Admin routes
+router.get('/users', isAuthenticated, isAdmin, validatePagination, getAllUsers);
 
-router.route("/login").post(loginUser);
-router.route("/isLogin").get(isAuthenticated, isLogin);
-router.route("/getAllUsers").get(getAllUsers);
- 
 export default router;
 

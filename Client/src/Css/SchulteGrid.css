@@ -1,0 +1,218 @@
+/* ========================================
+   CYBER GRID FINDER - RETRO ARCADE STYLE
+   ======================================== */
+
+.schulte-page-wrapper {
+  font-family: var(--font-secondary);
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+}
+
+/* Floating Navigation Back Button Theme */
+.schulte-page-wrapper .floating-back-btn {
+  border-color: rgba(0, 212, 255, 0.25) !important;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.05) !important;
+}
+
+.schulte-page-wrapper .floating-back-btn:hover {
+  background: rgba(0, 212, 255, 0.15) !important;
+  border-color: var(--primary-neon, #00d4ff) !important;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.35) !important;
+}
+
+/* Centered Game Cabinet Card */
+.schulte-page-wrapper .game-content-card {
+  width: 95%;
+  max-width: 650px;
+  margin: 5px auto;
+  padding: 8px 12px;
+  background: rgba(10, 10, 15, 0.95);
+  border: 2px solid rgba(0, 212, 255, 0.2);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 
+    0 0 35px rgba(0, 212, 255, 0.08), 
+    inset 0 0 25px rgba(0, 212, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CRT Screen overrides */
+.schulte-page-wrapper .cabinet-screen.crt-screen {
+  position: relative;
+  width: 100%;
+  max-width: calc(75vh - 140px);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  box-shadow: 
+    0 0 25px rgba(0, 212, 255, 0.15),
+    inset 0 0 35px rgba(0, 0, 0, 0.95);
+  background: #030206;
+}
+
+/* Scanlines Overlay */
+.schulte-page-wrapper .crt-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+}
+
+/* Curved CRT Glass Reflection */
+.schulte-page-wrapper .crt-reflection {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  background: radial-gradient(
+    circle at 50% 0%, 
+    rgba(255, 255, 255, 0.06) 0%, 
+    transparent 70%
+  );
+}
+
+/* Subtle CRT Screen Flicker */
+.schulte-page-wrapper .crt-flicker {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background: rgba(18, 16, 16, 0.02);
+  opacity: 0.15;
+  animation: crt-flicker-anim 0.15s infinite;
+}
+
+@keyframes crt-flicker-anim {
+  0% { opacity: 0.13; }
+  50% { opacity: 0.17; }
+  100% { opacity: 0.13; }
+}
+
+@media (max-width: 768px) {
+  .schulte-page-wrapper .game-content-card {
+    padding: 6px;
+    margin: 5px;
+    max-width: 100%;
+  }
+
+  .schulte-page-wrapper .cabinet-screen.crt-screen {
+    max-width: 100%;
+  }
+}
+
+
+/* --- DOM UI OVERLAYS --- */
+.schultegrid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(2, 2, 5, 0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: var(--radius-lg, 12px);
+}
+
+.schultegrid-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.schultegrid-btn {
+  background: transparent;
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  color: #8888a0;
+  font-family: 'Orbitron', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.schultegrid-btn:hover, .schultegrid-btn:focus, .schultegrid-btn.selected {
+  border-color: #00f0f0;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0, 240, 240, 0.4);
+  text-shadow: 0 0 8px rgba(0, 240, 240, 0.8);
+  outline: none;
+}
+
+.schultegrid-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 36px;
+  font-weight: bold;
+  color: #00d4ff;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.schultegrid-subtitle {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 14px;
+  color: #b4b4c8;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.schultegrid-leaderboard-container {
+  width: 90%;
+  max-width: 400px;
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.schultegrid-leaderboard-container::-webkit-scrollbar {
+  width: 6px;
+}
+.schultegrid-leaderboard-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.schultegrid-leaderboard-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.5);
+  border-radius: 3px;
+}
+
+.schultegrid-leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #fff;
+}
+.schultegrid-leaderboard-item:last-child {
+  border-bottom: none;
+}

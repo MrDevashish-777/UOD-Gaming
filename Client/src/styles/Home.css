@@ -1,0 +1,256 @@
+/* ========================================
+   LUSION-INSPIRED KINETIC LANDING STYLES
+   ======================================== */
+
+.home-wrapper {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Faint ambient light spotlights behind page elements */
+.ambient-spotlight {
+  position: absolute;
+  top: -10%;
+  left: 30%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.ambient-spotlight-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 0, 110, 0.07) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+/* ========================================
+   HERO / SYSTEM SHOWROOM SECTION
+   ======================================== */
+
+.hero-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+
+.hero-content.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: var(--space-3xl);
+  width: 100%;
+}
+
+/* Left Content */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-meta-label {
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  color: var(--primary-neon);
+  letter-spacing: 4px;
+  margin-bottom: var(--space-md);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+/* Title Word Masks for sliding reveal */
+.hero-title {
+  font-family: var(--font-primary);
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.title-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 14px;
+  vertical-align: bottom;
+  height: 1.25em;
+  padding-bottom: 0.1em;
+}
+
+.title-word-text {
+  display: inline-block;
+}
+
+.text-neon-cyan {
+  color: var(--primary-neon);
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.hero-subtitle {
+  font-family: var(--font-secondary);
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+  max-width: 540px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.btn-icon {
+  transition: transform var(--transition-fast);
+}
+
+.btn-primary:hover .btn-icon {
+  transform: translateX(3px);
+}
+
+/* Right Content - Showroom deck */
+.showroom-deck-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.showroom-card {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.showroom-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Top Glow Bar on Showroom Card */
+.showroom-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.card-index-dot {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  color: var(--primary-neon);
+  opacity: 0.8;
+  font-weight: 700;
+}
+
+.glow-bar {
+  width: 32px;
+  height: 2px;
+  background-color: var(--primary-neon);
+  box-shadow: 0 0 8px var(--primary-neon);
+}
+
+.showroom-card:nth-child(even) .glow-bar {
+  background-color: var(--secondary-neon);
+  box-shadow: 0 0 8px var(--secondary-neon);
+}
+.showroom-card:nth-child(even) .card-index-dot {
+  color: var(--secondary-neon);
+}
+
+.showroom-card-title {
+  font-family: var(--font-primary);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.showroom-card-desc {
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN RULES
+   ======================================== */
+
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-content.container {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+  
+  .hero-left {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hero-title {
+    justify-content: center;
+  }
+  
+  .hero-subtitle {
+    max-width: 100%;
+  }
+  
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .title-word-mask {
+    margin-right: 8px;
+  }
+  
+  .showroom-deck-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
